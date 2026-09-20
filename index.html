@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Constancia</title>
+  <meta name="theme-color" content="#100e0c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Constancia">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="top-row">
+      <span class="brand">Constancia</span>
+      <span class="top-right">
+        <span class="semana-total" id="semana-total"></span>
+        <button class="btn-audio" id="btn-audio" type="button" aria-label="Respuestas por voz" title="Respuestas por voz">🔊</button>
+      </span>
+    </div>
+    <h1 class="fecha" id="fecha"></h1>
+  </header>
+
+  <main id="app" class="app">
+    <section id="hero" class="hero-slot"></section>
+    <section id="grid" class="grid"></section>
+
+    <section class="hoy">
+      <div class="hoy-head">
+        <h2>Hoy</h2>
+        <span class="hoy-total" id="hoy-total"></span>
+      </div>
+      <ul id="hoy-lista" class="hoy-lista"></ul>
+    </section>
+  </main>
+
+  <button class="mic" id="mic" type="button" aria-label="Hablar">
+    <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+      <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>
+      <path d="M6 11a6 6 0 0 0 12 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 17v4M9 21h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <div id="escucha" class="escucha" hidden>
+    <div class="escucha-backdrop" data-cerrar-escucha></div>
+    <div class="escucha-panel" role="dialog" aria-modal="true" aria-live="polite">
+      <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="escucha-estado" id="escucha-estado">Escuchando…</p>
+      <p class="escucha-texto" id="escucha-texto"></p>
+      <form class="escucha-form" id="escucha-form" hidden>
+        <input id="escucha-input" type="text" placeholder="Escribí el comando" autocomplete="off">
+        <button class="btn-primary" type="submit">Ir</button>
+      </form>
+      <ul class="ejemplos">
+        <li>«inglés» · «inglés veinte minutos»</li>
+        <li>«gimnasio media hora» · «cu a doce»</li>
+        <li>«fueron quince» · «borrá el último»</li>
+        <li>«cómo voy»</li>
+      </ul>
+      <button class="btn-text" type="button" data-cerrar-escucha>Cancelar</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden>
+    <span class="toast-msg" id="toast-msg"></span>
+    <button class="toast-btn" id="toast-btn" type="button">Ajustar</button>
+  </div>
+
+  <div id="sheet" class="sheet" hidden>
+    <div class="sheet-backdrop" data-cerrar></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-titulo">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="sheet-top">
+        <span class="sheet-act" id="sheet-act"></span>
+        <span class="sheet-hora" id="sheet-hora"></span>
+      </div>
+      <h3 id="sheet-titulo" class="sheet-titulo">¿Cuántos minutos reales?</h3>
+
+      <div class="stepper">
+        <button class="step" type="button" data-step="-1" aria-label="Menos un minuto">−</button>
+        <input class="step-input" id="sheet-min" type="number" inputmode="numeric" min="1" max="600" step="1">
+        <button class="step" type="button" data-step="1" aria-label="Más un minuto">+</button>
+      </div>
+
+      <div class="chips" id="chips">
+        <button type="button" class="chip" data-min="8">8</button>
+        <button type="button" class="chip" data-min="12">12</button>
+        <button type="button" class="chip" data-min="16">16</button>
+        <button type="button" class="chip" data-min="20">20</button>
+        <button type="button" class="chip" data-min="30">30</button>
+        <button type="button" class="chip" data-min="45">45</button>
+      </div>
+
+      <button class="btn-primary" id="sheet-guardar" type="button">Guardar</button>
+      <div class="sheet-foot">
+        <button class="btn-text" type="button" data-cerrar>Cancelar</button>
+        <button class="btn-text danger" id="sheet-eliminar" type="button">Eliminar bloque</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
